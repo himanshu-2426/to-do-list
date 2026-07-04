@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,11 +7,37 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <nav class="navbar">
+      <div class="brand">✨ TaskFlow</div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <div class="history-menu">
+          <button id="history-toggle" class="history-btn">History</button>
+          <div id="history-panel" class="history-panel hidden">
+            <div class="history-header">
+              <strong>Deleted Tasks</strong>
+              <button id="clear-history" class="clear-history-btn">
+                Clear
+              </button>
+            </div>
+            <ul id="history-list"></ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <main class="app">
       <section class="card">
         <h1>Todo List</h1>
         <form id="todo-form">
-          <input id="todo-input" type="text" placeholder="What needs to be done?" maxlength="80" required />
+          <input
+            id="todo-input"
+            type="text"
+            placeholder="What needs to be done?"
+            maxlength="80"
+            required
+          />
           <button type="submit">Add</button>
         </form>
         <ul id="todo-list"></ul>
