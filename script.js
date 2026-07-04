@@ -22,7 +22,7 @@ function renderTodos() {
 
   todos.forEach((todo) => {
     const item = document.createElement('li');
-    item.className = todo.completed ? 'completed' : '';
+    item.className = `todo-item ${todo.completed ? 'completed' : ''}`;
 
     const text = document.createElement('span');
     text.textContent = todo.text;
