@@ -5,6 +5,8 @@ const historyToggle = document.getElementById('history-toggle');
 const historyPanel = document.getElementById('history-panel');
 const historyList = document.getElementById('history-list');
 const clearHistoryButton = document.getElementById('clear-history');
+const taskCount = document.getElementById('task-count');
+const clearAllButton = document.getElementById('clear-all-btn');
 
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
 let deletedTasks = JSON.parse(localStorage.getItem('deletedTasks')) || [];
@@ -17,6 +19,12 @@ function saveDeletedTasks() {
   localStorage.setItem('deletedTasks', JSON.stringify(deletedTasks));
 }
 
+function updateTaskCount() {
+  const remaining = todos.filter((todo) => !todo.completed).length;
+  const completed = todos.filter((todo) => todo.completed).length;
+  taskCount.textContent = `${remaining} active • ${completed} done`;
+}
+
 function renderTodos() {
   list.innerHTML = '';
 
@@ -26,6 +34,7 @@ function renderTodos() {
     emptyItem.style.justifyContent = 'center';
     emptyItem.style.color = '#64748b';
     list.appendChild(emptyItem);
+    updateTaskCount();
     return;
   }
 
@@ -54,6 +63,8 @@ function renderTodos() {
     item.appendChild(actions);
     list.appendChild(item);
   });
+
+  updateTaskCount();
 }
 
 function addTodo(text) {
@@ -129,12 +140,35 @@ function clearHistory() {
   renderHistory();
 }
 
+function clearAllTasks() {
+  if (todos.length === 0) return;
+
+  deletedTasks = [
+    ...todos.map((todo) => ({
+      id: Date.now() + Math.random(),
+      text: todo.text,
+      deletedAt: new Date().toLocaleString(),
+    })),
+    ...deletedTasks,
+  ];
+
+  todos = [];
+  saveTodos();
+  saveDeletedTasks();
+  renderTodos();
+  renderHistory();
+}
+
 historyToggle.addEventListener('click', () => {
   historyPanel.classList.toggle('hidden');
 });
 
 clearHistoryButton.addEventListener('click', () => {
   clearHistory();
+});
+
+clearAllButton.addEventListener('click', () => {
+  clearAllTasks();
 });
 
 form.addEventListener('submit', (event) => {

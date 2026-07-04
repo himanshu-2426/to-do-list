@@ -58,6 +58,26 @@ body {
     color: #2563eb;
 }
 
+.task-count {
+    color: #475569;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.45rem 0.7rem;
+    background: #f8fafc;
+    border-radius: 999px;
+}
+
+.clear-all-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    background: #f59e0b;
+    box-shadow: none;
+}
+
+.clear-all-btn:hover {
+    background: #d97706;
+}
+
 .history-menu {
     position: relative;
 }
